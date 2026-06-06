@@ -1,9 +1,3 @@
-//
-//  Jewelry_store_projectUITests.swift
-//  Jewelry_store_projectUITests
-//
-//  Created by Arsenii Dvornichenko on 13.05.2026.
-//
 
 import XCTest
 

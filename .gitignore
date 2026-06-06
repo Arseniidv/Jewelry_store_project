@@ -1,0 +1,30 @@
+# macOS resource forks (external drives)
+._*
+.DS_Store
+
+# Xcode user-specific data
+xcuserdata/
+*.xcuserstate
+
+# Xcode shared data (schemes)
+xcshareddata/
+
+# Build artifacts
+DerivedData/
+build/
+
+# Environment / secrets
+.env
+.env.local
+.env.example
+
+# Dependencies
+node_modules/
+
+# IDE
+.cursor/
+.idea/
+.vscode/
+
+# Server logs
+*.log

@@ -6,7 +6,20 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B54908E42FC4D4360090C5B0 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54908E32FC4D4360090C5B0 /* WidgetKit.framework */; };
+		B54908E62FC4D4360090C5B0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B54908E52FC4D4360090C5B0 /* SwiftUI.framework */; };
+		B54908F72FC4D4380090C5B0 /* JewelryNotificationsWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B54908E12FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
+		B54908F52FC4D4380090C5B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5C358712FB506890017157D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B54908E02FC4D4360090C5B0;
+			remoteInfo = JewelryNotificationsWidgetExtension;
+		};
 		B5C358872FB5068A0017157D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B5C358712FB506890017157D /* Project object */;
@@ -23,13 +36,49 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B54908FC2FC4D4380090C5B0 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B54908F72FC4D4380090C5B0 /* JewelryNotificationsWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B54908E12FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JewelryNotificationsWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B54908E32FC4D4360090C5B0 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B54908E52FC4D4360090C5B0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B54909092FC4E5850090C5B0 /* JewelryNotificationsWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JewelryNotificationsWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B5C358792FB506890017157D /* Jewelry_store_project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jewelry_store_project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C358862FB5068A0017157D /* Jewelry_store_projectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Jewelry_store_projectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C358902FB5068A0017157D /* Jewelry_store_projectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Jewelry_store_projectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B54908F82FC4D4380090C5B0 /* Exceptions for "JewelryNotificationsWidget" folder in "JewelryNotificationsWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B54908E02FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		B54908E72FC4D4360090C5B0 /* JewelryNotificationsWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B54908F82FC4D4380090C5B0 /* Exceptions for "JewelryNotificationsWidget" folder in "JewelryNotificationsWidgetExtension" target */,
+			);
+			path = JewelryNotificationsWidget;
+			sourceTree = "<group>";
+		};
 		B5C3587B2FB506890017157D /* Jewelry_store_project */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Jewelry_store_project;
@@ -48,6 +97,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B54908DE2FC4D4360090C5B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B54908E62FC4D4360090C5B0 /* SwiftUI.framework in Frameworks */,
+				B54908E42FC4D4360090C5B0 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5C358762FB506890017157D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -72,12 +130,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B54908E22FC4D4360090C5B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B54908E32FC4D4360090C5B0 /* WidgetKit.framework */,
+				B54908E52FC4D4360090C5B0 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B5C358702FB506890017157D = {
 			isa = PBXGroup;
 			children = (
+				B54909092FC4E5850090C5B0 /* JewelryNotificationsWidgetExtension.entitlements */,
 				B5C3587B2FB506890017157D /* Jewelry_store_project */,
 				B5C358892FB5068A0017157D /* Jewelry_store_projectTests */,
 				B5C358932FB5068B0017157D /* Jewelry_store_projectUITests */,
+				B54908E72FC4D4360090C5B0 /* JewelryNotificationsWidget */,
+				B54908E22FC4D4360090C5B0 /* Frameworks */,
 				B5C3587A2FB506890017157D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,6 +158,7 @@
 				B5C358792FB506890017157D /* Jewelry_store_project.app */,
 				B5C358862FB5068A0017157D /* Jewelry_store_projectTests.xctest */,
 				B5C358902FB5068A0017157D /* Jewelry_store_projectUITests.xctest */,
+				B54908E12FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +166,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B54908E02FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B54908F92FC4D4380090C5B0 /* Build configuration list for PBXNativeTarget "JewelryNotificationsWidgetExtension" */;
+			buildPhases = (
+				B54908DD2FC4D4360090C5B0 /* Sources */,
+				B54908DE2FC4D4360090C5B0 /* Frameworks */,
+				B54908DF2FC4D4360090C5B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B54908E72FC4D4360090C5B0 /* JewelryNotificationsWidget */,
+			);
+			name = JewelryNotificationsWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = JewelryNotificationsWidgetExtension;
+			productReference = B54908E12FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B5C358782FB506890017157D /* Jewelry_store_project */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5C3589A2FB5068B0017157D /* Build configuration list for PBXNativeTarget "Jewelry_store_project" */;
@@ -102,10 +195,12 @@
 				B5C358752FB506890017157D /* Sources */,
 				B5C358762FB506890017157D /* Frameworks */,
 				B5C358772FB506890017157D /* Resources */,
+				B54908FC2FC4D4380090C5B0 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B54908F62FC4D4380090C5B0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				B5C3587B2FB506890017157D /* Jewelry_store_project */,
@@ -173,6 +268,9 @@
 				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
+					B54908E02FC4D4360090C5B0 = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					B5C358782FB506890017157D = {
 						CreatedOnToolsVersion = 26.5;
 					};
@@ -203,11 +301,19 @@
 				B5C358782FB506890017157D /* Jewelry_store_project */,
 				B5C358852FB5068A0017157D /* Jewelry_store_projectTests */,
 				B5C3588F2FB5068A0017157D /* Jewelry_store_projectUITests */,
+				B54908E02FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B54908DF2FC4D4360090C5B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5C358772FB506890017157D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,6 +338,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B54908DD2FC4D4360090C5B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5C358752FB506890017157D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,6 +369,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B54908F62FC4D4380090C5B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B54908E02FC4D4360090C5B0 /* JewelryNotificationsWidgetExtension */;
+			targetProxy = B54908F52FC4D4380090C5B0 /* PBXContainerItemProxy */;
+		};
 		B5C358882FB5068A0017157D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B5C358782FB506890017157D /* Jewelry_store_project */;
@@ -269,6 +387,73 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		B54908FA2FC4D4380090C5B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = JewelryNotificationsWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JewelryNotificationsWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = JewelryNotificationsWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "come.arseniidv.Jewelry-store-project.JewelryNotificationsWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B54908FB2FC4D4380090C5B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = JewelryNotificationsWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JewelryNotificationsWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = JewelryNotificationsWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "come.arseniidv.Jewelry-store-project.JewelryNotificationsWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		B5C358982FB5068B0017157D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -388,12 +573,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Jewelry_store_project/Jewelry_store_project.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Jewelry-store-project-Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Авторизация по Face ID необходима для безопасного входа в ваш профиль ювелирного магазина и защиты личных данных.\nАвторизация по Face ID необходима для безопасного входа в ваш профиль ювелирного магазина и защиты личных данных.\nАвторизация по Face ID необходима для безопасного входа в ваш профиль ювелирного магазина и защиты личных данных.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -404,7 +593,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.4;
@@ -430,12 +619,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Jewelry_store_project/Jewelry_store_project.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Jewelry-store-project-Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Авторизация по Face ID необходима для безопасного входа в ваш профиль ювелирного магазина и защиты личных данных.\nАвторизация по Face ID необходима для безопасного входа в ваш профиль ювелирного магазина и защиты личных данных.\nАвторизация по Face ID необходима для безопасного входа в ваш профиль ювелирного магазина и защиты личных данных.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -446,7 +639,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.4;
@@ -473,6 +666,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
 				MACOSX_DEPLOYMENT_TARGET = 26.4;
@@ -498,6 +692,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
 				MACOSX_DEPLOYMENT_TARGET = 26.4;
@@ -522,6 +717,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
 				MACOSX_DEPLOYMENT_TARGET = 26.4;
@@ -546,6 +742,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QJZ6Q2G3QQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
 				MACOSX_DEPLOYMENT_TARGET = 26.4;
@@ -568,6 +765,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B54908F92FC4D4380090C5B0 /* Build configuration list for PBXNativeTarget "JewelryNotificationsWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B54908FA2FC4D4380090C5B0 /* Debug */,
+				B54908FB2FC4D4380090C5B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5C358742FB506890017157D /* Build configuration list for PBXProject "Jewelry_store_project" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

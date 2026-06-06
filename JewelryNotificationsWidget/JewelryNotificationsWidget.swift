@@ -1,88 +1,100 @@
-//
-//  JewelryNotificationsWidget.swift
-//  JewelryNotificationsWidget
-//
-//  Created by Arsenii Dvornichenko on 25.05.2026.
-//
-
 import WidgetKit
 import SwiftUI
 
-struct Provider: AppIntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
-    }
+// MARK: - Entry
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
-    }
-    
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
-        }
-
-        return Timeline(entries: entries, policy: .atEnd)
-    }
-
-//    func relevances() async -> WidgetRelevances<ConfigurationAppIntent> {
-//        // Generate a list containing the contexts this widget is relevant in.
-//    }
-}
-
-struct SimpleEntry: TimelineEntry {
+struct NotificationEntry: TimelineEntry {
     let date: Date
-    let configuration: ConfigurationAppIntent
+    let title: String
+    let body: String
 }
 
-struct JewelryNotificationsWidgetEntryView : View {
-    var entry: Provider.Entry
+// MARK: - Provider
+
+struct Provider: TimelineProvider {
+    func placeholder(in context: Context) -> NotificationEntry {
+        NotificationEntry(
+            date: Date(),
+            title: "No updates",
+            body: "You are all caught up"
+        )
+    }
+
+    private func readEntry() -> NotificationEntry {
+        let defaults = UserDefaults(suiteName: "group.com.jewelrystore")
+        let title = defaults?.string(forKey: "last_title")
+                 ?? defaults?.string(forKey: "widget_latest_title")
+                 ?? "No updates"
+        let body = defaults?.string(forKey: "last_body")
+                 ?? defaults?.string(forKey: "widget_latest_body")
+                 ?? "You are all caught up"
+        return NotificationEntry(date: Date(), title: title, body: body)
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (NotificationEntry) -> Void) {
+        guard !context.isPreview else {
+            completion(placeholder(in: context))
+            return
+        }
+        completion(readEntry())
+    }
+
+    func getTimeline(in context: Context, completion: @escaping (Timeline<NotificationEntry>) -> Void) {
+        let timeline = Timeline(entries: [readEntry()], policy: .atEnd)
+        completion(timeline)
+    }
+}
+
+// MARK: - View
+
+struct JewelryNotificationsWidgetEntryView: View {
+    var entry: NotificationEntry
 
     var body: some View {
-        VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 6) {
+                Circle()
+                    .fill(Color.blue)
+                    .frame(width: 8, height: 8)
+                Text("Latest Update")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(.secondary)
+            }
 
-            Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+            Text(entry.title)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundColor(.primary)
+                .lineLimit(1)
+
+            Text(entry.body)
+                .font(.system(size: 13))
+                .foregroundColor(.secondary)
+                .lineLimit(2)
         }
+        .padding(16)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .containerBackground(.background, for: .widget)
     }
 }
+
+// MARK: - Widget
 
 struct JewelryNotificationsWidget: Widget {
     let kind: String = "JewelryNotificationsWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
             JewelryNotificationsWidgetEntryView(entry: entry)
-                .containerBackground(.fill.tertiary, for: .widget)
         }
-    }
-}
-
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "😀"
-        return intent
-    }
-    
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        intent.favoriteEmoji = "🤩"
-        return intent
+        .configurationDisplayName("Store Updates")
+        .description("Stay updated with your order status and exclusive jewelry collection drops.")
+        .supportedFamilies([.systemSmall])
     }
 }
 
 #Preview(as: .systemSmall) {
     JewelryNotificationsWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    NotificationEntry(date: .now, title: "Order Shipped", body: "Your diamond ring has been dispatched and will arrive within 3-5 business days.")
+    NotificationEntry(date: .now, title: "New Collection", body: "Explore our latest gemstone collection featuring emeralds and sapphires.")
 }

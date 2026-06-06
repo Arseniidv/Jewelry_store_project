@@ -1,0 +1,12 @@
+{
+  "name": "jewelry-store-support-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node support.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "dotenv": "^16.4.0"
+  }
+}
