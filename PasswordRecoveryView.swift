@@ -1,82 +1,84 @@
 import SwiftUI
 
-// Polished Password Recovery screen with MVVM-friendly API.
-// Self-contained view to be dropped into an existing SwiftUI app.
+// Redesigned Password Recovery screen
+// Focus: align with app design system, 8-point spacing, accessible, responsive
+
+private enum Design {
+    static let spacing: CGFloat = 8
+    static let horizontalPadding: CGFloat = 20
+    static let cornerRadius: CGFloat = 12
+    static let headerFraction: CGFloat = 0.22 // reduced header height (≈30-40% smaller than before)
+    static let curveRatio: CGFloat = 0.08 // shallower curve
+}
 
 struct PasswordRecoveryView: View {
-    @StateObject var viewModel = PasswordRecoveryViewModel()
+    @StateObject private var internalVM = PasswordRecoveryViewModel()
+    @StateObject var viewModel: PasswordRecoveryViewModel
+
+    init(viewModel: PasswordRecoveryViewModel = PasswordRecoveryViewModel()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         GeometryReader { geo in
-            VStack(spacing: 0) {
-                header
-                    .frame(height: min(geo.size.height * 0.30, 260))
+            ZStack(alignment: .top) {
+                Color(.systemBackground).ignoresSafeArea()
 
-                formContainer
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.systemGroupedBackground))
-                    .edgesIgnoringSafeArea(.bottom)
+                VStack(spacing: 0) {
+                    header
+                        .frame(height: max(geo.size.height * Design.headerFraction, 160))
+
+                    content
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(.systemGroupedBackground))
+                }
+                .edgesIgnoringSafeArea(.top)
             }
-            .frame(width: geo.size.width, height: geo.size.height)
-            .background(Color(.systemBackground))
-            .ignoresSafeArea(edges: .top)
         }
     }
 
     private var header: some View {
         ZStack(alignment: .topLeading) {
-            // Brand background with a soft curve at the bottom
+            // Brand background with a shallow curve
             GeometryReader { g in
                 BrandColor
                     .overlay(
-                        CurvedTopShape(curveHeightRatio: 0.18)
+                        CurvedTopShape(curveHeightRatio: Design.curveRatio)
                             .fill(Color(.systemBackground))
-                            .offset(y: g.size.height * 0.48)
+                            .offset(y: g.size.height * 0.5)
                     )
-                    .clipShape(Rectangle())
             }
 
-            VStack(spacing: 8) {
-                spacerForNotch
+            HStack {
+                backButton
+                    .padding(.leading, Design.horizontalPadding)
+                Spacer()
+            }
+            .padding(.top, safeAreaTopPadding())
 
-                // Logo
+            VStack(spacing: Design.spacing) {
+                // Slightly elevated logo to feel balanced with smaller header
                 Text("LOOTIK")
-                    .font(.system(size: 36, weight: .regular, design: .serif))
+                    .font(.system(size: 32, weight: .regular, design: .serif))
                     .foregroundColor(.white)
                     .tracking(3)
+                    .accessibilityAddTraits(.isHeader)
 
                 Text("ювелирный дом")
-                    .font(.subheadline)
+                    .font(.footnote)
                     .foregroundColor(Color.white.opacity(0.9))
             }
             .frame(maxWidth: .infinity)
-            .padding(.top, 8)
-
-            // Back button placeholder (use existing nav in app)
-            Button(action: { viewModel.onBack?() }) {
-                HStack(spacing: 8) {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 16, weight: .semibold))
-                    Text("Назад")
-                        .font(.subheadline)
-                }
-                .foregroundColor(.white)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 12)
-                .background(Color.white.opacity(0.12))
-                .clipShape(Capsule())
-            }
-            .padding(.leading, 16)
-            .padding(.top, 16)
+            .padding(.top, 12)
         }
     }
 
-    private var formContainer: some View {
-        VStack(spacing: 16) {
-            // Title and description
-            VStack(spacing: 8) {
+    private var content: some View {
+        VStack(spacing: Design.spacing * 2) {
+            // Title block
+            VStack(spacing: Design.spacing) {
                 Text("Восстановление пароля")
-                    .font(.title2)
+                    .font(.title3)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
 
@@ -84,99 +86,100 @@ struct PasswordRecoveryView: View {
                     .font(.subheadline)
                     .foregroundColor(Color.secondary)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, Design.horizontalPadding)
             }
-            .padding(.top, 8)
+            .padding(.top, 16)
 
-            // Form fields
-            VStack(spacing: 12) {
-                FloatingLabelInput(label: "Электронная почта", text: $viewModel.email, placeholder: "name@example.com", keyboard: .emailAddress)
+            // Email field
+            VStack(spacing: Design.spacing / 2) {
+                Text("Электронная почта")
+                    .font(.caption)
+                    .foregroundColor(Color.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                AppTextField(text: $viewModel.email, placeholder: "name@example.com")
             }
-            .padding(.horizontal, 20)
-            .padding(.top, 4)
+            .padding(.horizontal, Design.horizontalPadding)
 
-            // Action
-            VStack(spacing: 8) {
-                Button(action: {
-                    Task { await viewModel.sendRecovery() }
-                }) {
-                    HStack {
-                        Spacer()
-                        if viewModel.isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                .frame(height: 20)
-                        } else {
-                            Text("ОТПРАВИТЬ ССЫЛКУ")
-                                .fontWeight(.semibold)
-                        }
-                        Spacer()
+            // Primary action
+            Button(action: { Task { await viewModel.sendRecovery() } }) {
+                HStack {
+                    Spacer()
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    } else {
+                        Text("ОТПРАВИТЬ ССЫЛКУ")
+                            .fontWeight(.semibold)
                     }
-                    .frame(height: 52)
-                    .background(PrimaryButtonBackground())
-                    .foregroundColor(.white)
-                    .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.12), radius: 8, x: 0, y: 4)
+                    Spacer()
                 }
-                .disabled(!viewModel.isEmailValid || viewModel.isLoading)
-                .padding(.horizontal, 20)
-
-                Spacer(minLength: 24)
+                .frame(height: 50)
+                .background(PrimaryGradient())
+                .foregroundColor(.white)
+                .cornerRadius(Design.cornerRadius)
+                .shadow(color: Color.black.opacity(0.12), radius: 6, x: 0, y: 3)
             }
-            .padding(.bottom, 24)
+            .padding(.horizontal, Design.horizontalPadding)
+            .disabled(!viewModel.isEmailValid || viewModel.isLoading)
+
+            Spacer(minLength: 24)
         }
-        .padding(.top, 12)
+        .padding(.top, -32) // pull the content closer to the header for better balance
     }
 
-    private var spacerForNotch: some View {
-        // Keep safe area spacing consistent across devices
-        Color.clear.frame(height: 8)
+    private var backButton: some View {
+        Button(action: { viewModel.onBack?() }) {
+            HStack(spacing: 8) {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 14, weight: .semibold))
+                Text("Назад")
+                    .font(.subheadline)
+            }
+            .foregroundColor(.white)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .background(Color.white.opacity(0.10))
+            .clipShape(Capsule())
+        }
+        .accessibilityIdentifier("password_recovery_back")
     }
 
-    // Reusable brand color (replace with project's token where available)
+    private func safeAreaTopPadding() -> CGFloat {
+        // Reasonable top padding for status bar / notch
+        return UIApplication.shared.windows.first?.safeAreaInsets.top ?? 12
+    }
+
     private var BrandColor: Color { Color(hex: "EE6B4F") }
 }
 
-// MARK: - Supporting Views
+// MARK: - Reusable subviews (replace with project's components when available)
 
-private struct PrimaryButtonBackground: View {
-    var body: some View {
-        LinearGradient(colors: [Color(hex: "EE6B4F"), Color(hex: "E98A72")], startPoint: .topLeading, endPoint: .bottomTrailing)
-    }
-}
-
-private struct FloatingLabelInput: View {
-    let label: String
+private struct AppTextField: View {
     @Binding var text: String
     var placeholder: String = ""
-    var keyboard: UIKeyboardType = .default
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(label.uppercased())
-                .font(.caption2)
-                .foregroundColor(Color.secondary)
-
-            TextField(placeholder, text: $text)
-                .keyboardType(keyboard)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .padding(12)
-                .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(Color(.secondarySystemBackground))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray.opacity(0.22), lineWidth: 1)
-                )
-        }
+        TextField(placeholder, text: $text)
+            .keyboardType(.emailAddress)
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+            .padding(12)
+            .background(RoundedRectangle(cornerRadius: Design.cornerRadius).fill(Color(.secondarySystemBackground)))
+            .overlay(RoundedRectangle(cornerRadius: Design.cornerRadius).stroke(Color.gray.opacity(0.22), lineWidth: 1))
+            .accessibilityLabel("Электронная почта")
     }
 }
 
-// A gentle concave curve used to separate header and form
+private struct PrimaryGradient: View {
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [Color(hex: "EE6B4F"), Color(hex: "E98A72")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
+}
+
+// Shallow concave curve used to separate header and content. Smaller curve for a subtler effect.
 private struct CurvedTopShape: Shape {
-    let curveHeightRatio: CGFloat // fraction of rect.height used to draw curve
+    let curveHeightRatio: CGFloat
 
     func path(in rect: CGRect) -> Path {
         let curveH = rect.height * curveHeightRatio
@@ -184,18 +187,13 @@ private struct CurvedTopShape: Shape {
         path.move(to: CGPoint(x: 0, y: 0))
         path.addLine(to: CGPoint(x: rect.width, y: 0))
         path.addLine(to: CGPoint(x: rect.width, y: rect.height - curveH))
-
-        path.addQuadCurve(
-            to: CGPoint(x: 0, y: rect.height - curveH),
-            control: CGPoint(x: rect.midX, y: rect.height + curveH)
-        )
-
+        path.addQuadCurve(to: CGPoint(x: 0, y: rect.height - curveH), control: CGPoint(x: rect.midX, y: rect.height + curveH))
         path.closeSubpath()
         return path
     }
 }
 
-// MARK: - Color helpers
+// MARK: - Color helper
 
 private extension Color {
     init(hex: String) {
@@ -204,22 +202,16 @@ private extension Color {
         Scanner(string: hex).scanHexInt64(&int)
         let a, r, g, b: UInt64
         switch hex.count {
-        case 3: // RGB (12-bit)
+        case 3:
             (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
+        case 6:
             (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
+        case 8:
             (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
         default:
             (a, r, g, b) = (255, 0, 0, 0)
         }
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
-        )
+        self.init(.sRGB, red: Double(r) / 255, green: Double(g) / 255, blue: Double(b) / 255, opacity: Double(a) / 255)
     }
 }
 
@@ -235,6 +227,9 @@ struct PasswordRecoveryView_Previews: PreviewProvider {
             PasswordRecoveryView()
                 .previewDevice("iPhone SE (3rd generation)")
                 .environment(\.sizeCategory, .accessibilityExtraLarge)
+
+            PasswordRecoveryView()
+                .previewDevice("iPhone 15 Pro Max")
         }
     }
 }
