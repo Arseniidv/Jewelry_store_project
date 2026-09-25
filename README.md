@@ -15,3 +15,8 @@
 Проект демонстрирует практический опыт разработки iOS-приложений полного цикла: **SwiftUI → архитектура → локальное/облачное хранение → авторизация → системные API Apple → push-уведомления → WidgetKit → REST API → Node.js backend**.
 
 **Репозиторий:** github.com/Arseniidv/Jewelry_store_project
+**Telegram**:
+https://t.me/arseniiDv
+
+**Email**:
+arsenidvornichenko@gmail.com
